@@ -12,4 +12,4 @@ function init() {
 }
 
 // Run initialization
-//init()
+init()
