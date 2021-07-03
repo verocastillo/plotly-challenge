@@ -22,9 +22,10 @@ function init() {
 function runEnter() {
     // Reads the ID value from the dropdown
     var selectid = parseInt(button.property("value"));
-    // Get the metadata from samples.json
+    // Get the metadata and samples from samples.json
     d3.json("samples.json").then((data)=> {
         var metadata = data.metadata;
+	    var otusamples = data.samples;
         // Select the metadata box from index.html
         var metadatabox = d3.select("#sample-metadata");
         // Delete info on the panel before filling (again)
@@ -37,16 +38,39 @@ function runEnter() {
             metadatabox.append("p").text(`${key}: ${value}`);
         })
     // Bar plot
-        // Get OTU data
-        var otusamples = data.samples;
-        // Filter to selected ID
-        //var selectotu = otusamples.find(selected =>
-        //    selected.id === selectid);
-        //console.log(selectotu);
-        console.log(otusamples);
-        var samples = data.samples.filter(s => s.selectid.toString() === id)[0];
-        console.log(samples);
-
+        // Filter ‘samples’ to selected ID
+        var sampledata = otusamples.find(sample => 
+            sample.id == selectid
+            );
+        // Get the top 10 OTU ids, values and labels
+        var samplevalues = sampledata.sample_values.slice(0, 10).reverse();
+        var otuids = sampledata.otu_ids.slice(0, 10).reverse();
+        var otunames = []
+            otuids.map(name => {
+                otunames.push(`OTU ${name}`)});
+        var otulabels = sampledata.otu_labels.slice(0, 10).reverse();
+        // Create trace for bar plot
+        var trace0 = {
+            x: samplevalues,
+            y: otunames,
+            text: otulabels,
+            type:"bar",
+            orientation: "h",
+        };         
+        // Create data variable
+        var bardata = [trace0];
+        // Set plot layout in variable
+        var layout0 = {
+            title: {text: "<b>Top 10 Bacteria Cultures (OTU)</b>",
+            y : .80
+              },
+            xaxis: { title: "Sample Values", 
+                automargin: true, },
+            yaxis: { title: "OTU ID"},
+            margin: { l: 110, r: 10, t: 110, b: 50 }
+          };
+        // Plot bar chart
+        Plotly.newPlot('bar', bardata, layout0);
     }); 
 }
 
