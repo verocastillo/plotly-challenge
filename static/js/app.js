@@ -11,5 +11,12 @@ function init() {
     })
 }
 
+// Event handlers: change page on trigger
+var button = d3.select("#selDataset");
+button.on('change', runEnter);
+
+// Function to obtain graphs and information
+
+
 // Run initialization
 init()
