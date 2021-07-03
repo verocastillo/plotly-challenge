@@ -43,17 +43,20 @@ function runEnter() {
             sample.id == selectid
             );
         // Get the top 10 OTU ids, values and labels
-        var samplevalues = sampledata.sample_values.slice(0, 10).reverse();
-        var otuids = sampledata.otu_ids.slice(0, 10).reverse();
+        var samplevalues = sampledata.sample_values;
+        var slicesamples = samplevalues.slice(0, 10).reverse();
+        var otuids = sampledata.otu_ids;
+        var sliceids = otuids.slice(0, 10).reverse();
         var otunames = []
-            otuids.map(name => {
+            sliceids.map(name => {
                 otunames.push(`OTU ${name}`)});
-        var otulabels = sampledata.otu_labels.slice(0, 10).reverse();
+        var otulabels = sampledata.otu_labels;
+        var slicelabels = otulabels.slice(0, 10).reverse();
         // Create trace for bar plot
         var trace0 = {
-            x: samplevalues,
+            x: slicesamples,
             y: otunames,
-            text: otulabels,
+            text: slicelabels,
             type:"bar",
             orientation: "h",
         };         
@@ -71,7 +74,29 @@ function runEnter() {
           };
         // Plot bar chart
         Plotly.newPlot('bar', bardata, layout0);
-    }); 
+    // Bubble chart
+        // Create trace for bubble plot
+        var trace1 = {
+            x: otuids,
+            y: samplevalues,
+            text: otulabels,
+            mode: 'markers',
+            marker: {
+                color: otuids,
+                size: samplevalues
+            }
+        };
+        // Create data variable
+        var bubbledata = [trace1];
+        // Set plot layout in variable
+        var layout1 = {
+            title: {text: '<b>Bacteria Cultures per Sample</b>'},
+            showlegend: false,
+            xaxis: { title: "OTI IDs" },
+        };
+        Plotly.newPlot('bubble', bubbledata, layout1);
+        
+    });
 }
 
 // Run initialization
