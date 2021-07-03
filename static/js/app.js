@@ -22,7 +22,21 @@ function init() {
 function runEnter() {
     // Reads the ID value from the dropdown
     var selectid = parseInt(button.property("value"));
-    //
+    // Get the metadata from samples.json
+    d3.json("samples.json").then((data)=> {
+        var metadata = data.metadata;
+        // Select the metadata box from index.html
+        var metadatabox = d3.select("#sample-metadata");
+        // Delete info on the panel before filling (again)
+        metadatabox.html("");
+        // Filter info by selected id
+        var selectdata = metadata.find(selected =>
+            selected.id === selectid);
+        // Append to demographic box
+        Object.entries(selectdata).map(([key, value]) => {
+            metadatabox.append("p").text(`${key}: ${value}`);
+        })
+    }); 
 }
 
 // Run initialization
