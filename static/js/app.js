@@ -36,7 +36,17 @@ function runEnter() {
         Object.entries(selectdata).map(([key, value]) => {
             metadatabox.append("p").text(`${key}: ${value}`);
         })
-        // 
+    // Bar plot
+        // Get OTU data
+        var otusamples = data.samples;
+        // Filter to selected ID
+        //var selectotu = otusamples.find(selected =>
+        //    selected.id === selectid);
+        //console.log(selectotu);
+        console.log(otusamples);
+        var samples = data.samples.filter(s => s.selectid.toString() === id)[0];
+        console.log(samples);
+
     }); 
 }
 
