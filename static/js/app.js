@@ -36,6 +36,7 @@ function runEnter() {
         Object.entries(selectdata).map(([key, value]) => {
             metadatabox.append("p").text(`${key}: ${value}`);
         })
+        // 
     }); 
 }
 
