@@ -3,7 +3,7 @@
 
 In this repository, I created a visualization dashboard website using plots based on a dataset that contains information about belly button flora diversity in different individuals. For this, I used Plotly for JavaScript.
 
-**Navigating Through The Repository
+**Navigating Through The Repository**
 
 The structure of the repository is simple:
 
@@ -27,7 +27,7 @@ The dashboard contains:
 4. A bubble chart that displays each bacteria in the sample.
 <img width="1043" alt="04-bubble" src="https://user-images.githubusercontent.com/77795761/124369916-c5cfb280-dc36-11eb-9b36-0fcccabdf936.png">
 
-**Bonus: 
+**Bonus:** 
 
 5. A gauge chart indicating the times per week the individual washes their belly button.
 <img width="495" alt="05-gauge" src="https://user-images.githubusercontent.com/77795761/124369923-d5e79200-dc36-11eb-80b6-cad40f81cf3b.png">
