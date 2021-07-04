@@ -95,7 +95,34 @@ function runEnter() {
             xaxis: { title: "OTI IDs" },
         };
         Plotly.newPlot('bubble', bubbledata, layout1);
-        
+    // Bonus: gauge plot
+        // Create data variable
+        var gaugedata = [{
+          domain: { x: [0, 1], y: [0, 1] },
+          value: selectdata.wfreq,
+          title: { text: "<b>Belly Button Washing Frequency</b><br> Scrubs per Week" },
+          type: "indicator",
+          mode: "gauge+number+delta",
+          gauge: {
+            axis: { range: [null, 10] },
+            bar: { color: "royalblue" },
+            steps: [
+              { range: [null, 2], color: "lightsteelblue" },
+              { range: [2, 4], color: "powderblue" },
+              { range: [4, 6], color: "lightblue" },
+              { range: [6, 8], color: "skyblue" },
+              { range: [8, 10], color: "lightskyblue" }
+            ],
+            threshold: {
+              line: { color: "blue", width: 4 },
+              thickness: 0.75,
+              value: 490
+            }
+          }
+        }
+      ];
+      var layout2 = { width: 600, height: 450, margin: { t: 0, b: 0 } };
+      Plotly.newPlot('gauge', gaugedata, layout2);
     });
 }
 
