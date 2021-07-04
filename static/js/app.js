@@ -94,6 +94,7 @@ function runEnter() {
             showlegend: false,
             xaxis: { title: "OTU IDs" },
         };
+        // Plot the bubble chart
         Plotly.newPlot('bubble', bubbledata, layout1);
     // Bonus: gauge plot
         // Create data variable
@@ -104,6 +105,7 @@ function runEnter() {
           type: "indicator",
           mode: "gauge+number+delta",
           gauge: {
+            // Made range up to 10 instead of 9, for visualization purposes.
             axis: { range: [null, 10] },
             bar: { color: "royalblue" },
             steps: [
@@ -121,7 +123,9 @@ function runEnter() {
           }
         }
       ];
+      // Create layout variable
       var layout2 = { width: 600, height: 450, margin: { t: 0, b: 0 } };
+      // Plot the gauge plot
       Plotly.newPlot('gauge', gaugedata, layout2);
     });
 }
