@@ -92,7 +92,7 @@ function runEnter() {
         var layout1 = {
             title: {text: '<b>Bacteria Cultures per Sample</b>'},
             showlegend: false,
-            xaxis: { title: "OTI IDs" },
+            xaxis: { title: "OTU IDs" },
         };
         Plotly.newPlot('bubble', bubbledata, layout1);
     // Bonus: gauge plot
